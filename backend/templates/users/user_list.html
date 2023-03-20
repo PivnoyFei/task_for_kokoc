@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+  {% block title %} Все пользователи {% endblock title %}
+  {% block content %}
+
+    <section class="grid">
+      {% for item in page_obj %}
+        <div class="container list-group-item list-group-item-action" style="border-color: {{ item.color }}; background: {{ item.color }}33;">
+          <div class="row">
+            <div class="col-10">
+              <h5 class="mb-1">&nbsp;{{ item.username }}</h5>
+              <p class="mb-1"><small>&nbsp;Пройдено тестов: {{ item.passed_tests }}</small>
+            </div>
+            {% include 'includes/color.html' %}
+          </div>
+        </div>
+      {% endfor %}
+    </section>
+
+    {% include "includes/paginator.html" %}
+  {% endblock content %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+  {% block title %}
+    {% if bool_answer %}
+      Тест пройден
+    {% else %}
+      Попробуйте еще раз
+    {% endif %}
+  {% endblock title %}
+
+  {% block content %}
+    <section class="grid">
+      {% if count_correct_answers %}
+        {% if bool_answer %}
+          <p class="mb-1"><small>&nbsp;Тест пройден</small></p>
+        {% else %}
+          <p class="mb-1"><small>&nbsp;Попробуйте еще раз</small></p>
+        {% endif %}
+        <p class="mb-1"><small>&nbsp;Правильных ответов: {{ count_correct_answers_user }} из {{ count_correct_answers }}</small></p>
+      {% else %}
+        <p class="mb-1"><small>&nbsp;Тест уже пройден</small></p>
+      {% endif %}
+      {% if bool_answer %}
+        <form action="{% url 'app:index' %}" method="get">
+          <button type="submit" class="grid-item list-group-item list-group-item-action">
+            Пройти другой тест
+          </button>
+        </form>
+      {% else %}
+        <form action="{% url 'app:test' test_pk %}" method="get">
+          <button type="submit" class="grid-item list-group-item list-group-item-action">
+            Попробовать еще раз
+          </button>
+        </form>
+      {% endif %}
+    </section>
+  {% endblock content %}

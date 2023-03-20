@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+  {% block title %} {{ user.username }} {% endblock title %}
+  {% block content %}
+
+    <section class="grid">
+      {% if request.path == '/profile/' %}
+          <div class="container list-group-item list-group-item-action" style="border-color: {{ user.color }}; background: {{ user.color }}33;">
+            <div class="row">
+              <div class="col-10">
+                <h5 class="mb-1">&nbsp;{{ user.username }}</h5>
+                <p class="mb-1"><small>&nbsp;Баланс монет: {{ user.balance }}</small></p>
+                <p class="mb-1"><small>&nbsp;Пройдено тестов: {{ user.passed_tests }}</small>
+              </div>
+              <div class="col-1 d28{{ user.id }}"></div>
+                <style>
+                    .d28{{ user.id }} {
+                      height: 20px; 
+                      width: 70px; 
+                      margin: 10px;
+                      position: relative;
+                      }
+                    .d28{{ user.id }}:before, 
+                    .d28{{ user.id }}:after {
+                      content: "";
+                      height: 100%; 
+                      width: 50%;
+                      position: absolute; 
+                      top: 0;
+                      background: {{ user.color }};
+                      }
+                    .d28{{ user.id }}:before {
+                      left: 0;
+                      transform: skew(0deg, 10deg);
+                      }
+                    .d28{{ user.id }}:after {
+                      right: 0;
+                      transform: skew(0deg, -10deg);
+                      }
+                </style>
+            </div>
+          </div>
+          <form action="{% url 'users:buy' %}" method="get">
+            <button  type="submit" class="grid-item list-group-item list-group-item-action">
+              <h5 class="mb-1">&nbsp;Купить цвета для значка и фона</h5>
+            </button>
+          </form>
+          <div class="container list-group-item list-group-item-action">
+            <h5 class="mb-1">&nbsp;Купленные цвета для значка и фона</h5>
+          </div>
+          {% for item in page_obj %}
+            <form action="{% url 'users:profile' %}" method="post">
+              {% csrf_token %}
+              <button class="container list-group-item list-group-item-action" type="submit" name="color" value="{{ item.color.id }}" onclick="return confirm('Вы уверены что хотите поменять свой цвет на {{ item.color.name }}?')" style="border-color: {{ item.color.color }}; background: {{ item.color.color }}33;">
+                <div class="row">
+                  <div class="col-10">
+                    <h5 class="mb-1">&nbsp;{{ item.color.name }}</h5>
+                  </div>
+                  {% include 'includes/color.html' %}
+                </div>
+              </button>
+            </form>
+          {% endfor %}
+      {% endif %}
+
+      {% if request.path == '/buy/' %}
+        <div class="container list-group-item list-group-item-action">
+          <h5 class="mb-1">&nbsp;Купить цвета для значка и фона</h5>
+        </div>
+        {% for item in page_obj %}
+            <form action="{% url 'users:buy' %}" method="post">
+              {% csrf_token %}
+              {% if user.balance >= item.price %}
+                <button class="container list-group-item list-group-item-action" type="submit" name="color" value="{{ item.id }}" onclick="return confirm('Вы уверены что хотите купить цвет <{{ item.name }}> за {{ item.price }}?')" style="border-color: {{ item.color }}; background: {{ item.color }}33;">
+              {% else %}
+                <button class="container list-group-item list-group-item-action" onclick="if(confirm('Вам не хватает монет что бы купить цвет <{{ item.name }}> за {{ item.price }}!')){return false;}else{return false;};" style="border-color: {{ item.color }}; background: {{ item.color }}33;">
+              {% endif %}
+                <div class="row">
+                  <div class="col-10">
+                    <h5 class="mb-1">&nbsp;{{ item.name }}</h5>
+                    <p class="mb-1"><small>&nbsp;Цена: {{ item.price }}</small>
+                  </div>
+                  {% include 'includes/color.html' %}
+              </button>
+            </form>
+          {% endfor %}
+      {% endif %}
+
+
+    </section>
+    {% include "includes/paginator.html" %}
+  {% endblock content %}

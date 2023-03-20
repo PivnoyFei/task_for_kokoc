@@ -1,0 +1,27 @@
+    
+    <div class="col-1 d30{{ item.id }}"></div>
+        <style>
+            .d30{{ item.id }} {
+              height: 20px; 
+              width: 70px; 
+              margin: 10px;
+              position: relative;
+              }
+            .d30{{ item.id }}:before, 
+            .d30{{ item.id }}:after {
+              content: "";
+              height: 100%; 
+              width: 50%;
+              position: absolute; 
+              top: 0;
+              background: {{ item.color }};
+              }
+            .d30{{ item.id }}:before {
+              left: 0;
+              transform: skew(0deg, 10deg);
+              }
+            .d30{{ item.id }}:after {
+              right: 0;
+              transform: skew(0deg, -10deg);
+              }
+        </style>

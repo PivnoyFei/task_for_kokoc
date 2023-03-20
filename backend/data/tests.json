@@ -1,0 +1,27 @@
+[
+    {
+        "test": {"title": "Новый год", "coin": 30, "points": 3, "description": "Проверим на сколько хорошо ты знаешь новогоднюю тематику."},
+        "question": [
+            {
+                "text": "Какого цвета костюм Деда Мороза?",
+                "answer": [{"answer": "Красного", "is_correct": true}, {"answer": "Зеленого", "is_correct": false}, {"answer": "Синего", "is_correct": true}]
+            },
+            {
+                "text": "Чем украшают йолку?",
+                "answer": [{"answer": "Шариками", "is_correct": true}, {"answer": "Квадратами", "is_correct": false}, {"answer": "Котятами", "is_correct": false}]
+            },
+            {
+                "text": "Куда ставят подарки?",
+                "answer": [{"answer": "Под йолку", "is_correct": true}, {"answer": "На балкон", "is_correct": false}, {"answer": "К соседям", "is_correct": false}]
+            },
+            {
+                "text": "Сколько в Деда Мороза внучек?",
+                "answer": [{"answer": "Одна", "is_correct": true}, {"answer": "Две", "is_correct": false}, {"answer": "Три", "is_correct": false}]
+            },
+            {
+                "text": "Жена Деда Мороза?",
+                "answer": [{"answer": "Матушка Зима", "is_correct": true}, {"answer": "Баба-Яга", "is_correct": false}, {"answer": "Снегурочка", "is_correct": false}]
+            }
+        ]
+    }
+]

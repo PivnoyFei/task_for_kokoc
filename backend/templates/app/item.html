@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load user_filters %}
+  {% block title %} {{ test.title }} {% endblock title %}
+  {% block content %}
+
+    <article>
+      <form action="{% url 'app:test' test.id %}" method="post">
+        {% csrf_token %}
+        {% for question in obj %}
+           <div class="grid list-group-item list-group-item-action">
+             <h5 class="mb-1">&nbsp;{{ question.text }}</h5>
+               {% for answer in question.answers.all %}
+                 <input type="checkbox" name="{{ question.id }}" value="{{ answer.id }}">{{ answer.answer }}<br>
+               {% endfor %}
+            </div>
+        {% endfor %}
+
+        <div class="col-md-6 offset-md-5">
+          <button type="submit" class="btn btn-primary">
+            Отправить
+          </button>
+        </div>
+      </form>
+  
+    </article>
+
+  {% endblock content %}

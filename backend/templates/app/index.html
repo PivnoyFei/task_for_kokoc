@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load cache %}
+  {% block title %} Все тесты {% endblock title %}
+  {% block content %}
+
+    {% cache 1 sidebar %}
+      <section class="grid">
+        {% for item in page_obj %}
+
+          <form action="{% url 'app:test' item.pk %}" method="get">
+            <button type="submit" class="grid-item list-group-item list-group-item-action">
+              <h5 class="mb-1">&nbsp;{{ item.title }}</h5>
+              <p class="mb-1"><description class="game-text">&nbsp;{{ item.description|truncatechars:117 }}</description></p>
+              <p class="mb-1"><small>&nbsp;Вопросов в тесте:</small><small style="font-weight:bold">&nbsp;{{ item.questions.count }}</small></p>
+              {% if item.coin %}
+                <p class="mb-1"><small>&nbsp;Начислят очков за прохождение теста:</small><small style="font-weight:bold">&nbsp;{{ item.coin }}</small></p>
+              {% else %}
+                <p class="mb-1"><small>&nbsp;Начислят очков за прохождение теста:</small><small style="color:red; font-weight:bold">&nbsp;{{ item.points }}</small></p>
+              {% endif %}
+            </button>
+          </form>
+
+        {% endfor %}
+      </section>
+    {% endcache %}
+
+    {% include "includes/paginator.html" %}
+  {% endblock content %}
