@@ -10,6 +10,8 @@
 ![Django](https://img.shields.io/badge/Django-171515?style=flat-square&logo=Django)![4.1.7](https://img.shields.io/badge/4.1.7-blue?style=flat-square&logo=4.1.7)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-171515?style=flat-square&logo=PostgreSQL)![13.0](https://img.shields.io/badge/13.0-blue?style=flat-square&logo=13.0)
 ![SQLite](https://img.shields.io/badge/SQLite-171515?style=flat-square&logo=SQLite)
+![Nginx](https://img.shields.io/badge/Nginx-171515?style=flat-square&logo=Nginx)
+![Pytest](https://img.shields.io/badge/Pytest-171515?style=flat-square&logo=Pytest)
 
 ### Задание
 #### Создать сервис прохождения опросов пользователями на Django.
